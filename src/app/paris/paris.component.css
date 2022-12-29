@@ -1,0 +1,204 @@
+.game-instructions {
+  text-align: center;
+  width: 35vw;
+  z-index: 100;
+
+}
+
+.text {
+  font-family: 'Aharoni', sans-serif;
+  color: aliceblue;
+  opacity: 100%;
+}
+
+.wrapper {
+  width: 80vw;
+  height: 85vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5vh;
+  z-index: 100;
+}
+
+h1 {
+  font-size: 10vh;
+  margin-bottom: 3vh;
+}
+
+h6 {
+  font-size: 1.75vh;
+  margin-top: -1vh;
+}
+
+h5 {
+  font-size: 2vh;
+}
+
+.close {
+  width: 7.5vw;
+  height: 5vh;
+  border-radius: 23px;
+  cursor: pointer;
+}
+
+.card {
+  height: 20vh;
+  filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.2));
+}
+
+.darkend {
+  height: 20vh;
+  filter: brightness(50%);
+}
+
+.p1card0 {
+  transform: rotate(70deg);
+  transform-origin: bottom left;
+  left: 10rem;
+  z-index: 7;
+}
+
+.p1card1 {
+  transform: rotate(50deg);
+  transform-origin: bottom left;
+  margin-left: -10%;
+  z-index: 6;
+}
+
+.p1card2 {
+  transform: rotate(30deg);
+  transform-origin: bottom left;
+  margin-left: -10%;
+  z-index: 5;
+}
+
+.p1card3 {
+  transform: rotate(10deg);
+  transform-origin: bottom left;
+  margin-left: -10%;
+  margin-right: -5%;
+  z-index: 4;
+}
+
+.p1card4 {
+  transform: rotate(-10deg);
+  transform-origin: bottom right;
+  margin-right: -10%;
+  margin-left: -5%;
+  z-index: 3;
+}
+
+.p1card5 {
+  transform: rotate(-30deg);
+  transform-origin: bottom right;
+  margin-right: -10%;
+  z-index: 2;
+}
+
+.p1card6 {
+  transform: rotate(-50deg);
+  transform-origin: bottom right;
+  margin-right: -10%;
+  z-index: 1;
+}
+
+.p1card7 {
+  transform: rotate(-70deg);
+  transform-origin: bottom right;
+  z-index: 0;
+}
+
+.float {
+  transition-duration: 125ms;
+  transition-property: transform;
+}
+
+.float:hover {
+  transform: translateY(-15px);
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.first {
+  position: relative;
+  top: 1vh;
+  font-size: 2.5vh;
+}
+
+.second {
+  position: relative;
+  top: 1.5vh;
+  font-size: 3vh;
+}
+
+.ct {
+  font-size: 2vh;
+}
+
+.player {
+  width: 15vh;
+  height: 8vh;
+  background-color: #44546A;
+  border-radius: 1vh;
+  text-align: center;
+}
+
+.textplayer {
+  margin: auto;
+  font-family: 'Aharoni', sans-serif;
+  color: aliceblue;
+}
+
+.one {
+  position: absolute;
+  bottom: 8vh;
+  right: 23vw;
+  filter: drop-shadow(-0.2rem 0.2rem 0.25rem rgba(0, 0, 0, 0.2));
+}
+
+.three {
+  position: absolute;
+  top: 8vh;
+  left: 23vw;
+  filter: drop-shadow(0.2rem 0.2rem 0.25rem rgba(0, 0, 0, 0.2));
+}
+
+
+.two {
+  position: absolute;
+  bottom: 12vh;
+  left: 15vw;
+  filter: drop-shadow(0.2rem 0.2rem 0.25rem rgba(0, 0, 0, 0.2));
+}
+
+.four {
+  position: absolute;
+  top: 12vh;
+  right: 15vw;
+  filter: drop-shadow(0.2rem 0.2rem 0.25rem rgba(0, 0, 0, 0.2));
+}
+
+.glow {
+  filter: drop-shadow(0px 0px 30px #bb0000);
+  background-color: #bb0000;
+}
+
+.stich {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+}

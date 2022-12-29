@@ -1,0 +1,34 @@
+img {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+   width: 40vh;
+}
+
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.button {
+  width: 20vh;
+  height: 5vh;
+  border: none;
+  background-color: #222a35;
+  border-radius: 2.5vh;
+  cursor: pointer;
+}
+
+b {
+  font-family: 'Aharoni', sans-serif;
+  color: white;
+  font-size: 3vh;
+}
+

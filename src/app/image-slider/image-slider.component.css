@@ -1,0 +1,35 @@
+.slider {
+  display: flex;
+  margin-top: 8vh;
+}
+img {
+  /* Add a transition effect to the image */
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  height: 8vh;
+}
+
+
+.previous {
+  margin: 1.75vh;
+  width: 0;
+  height: 0;
+  border: 1.5vh solid transparent;
+  border-left-width: 0;
+  border-right-color: #222a35;
+  cursor: pointer;
+}
+
+.next {
+  margin: 1.75vh;
+  width: 0;
+  height: 0;
+  border: 1.5vh solid transparent;
+  border-right-width: 0;
+  border-left-color: #222a35;
+  cursor: pointer;
+}

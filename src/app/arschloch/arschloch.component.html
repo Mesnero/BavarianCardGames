@@ -1,0 +1,147 @@
+<app-card-table></app-card-table>
+
+<div class="center">
+<div style="display: flex; margin-bottom: -5%">
+<div *ngFor="let card of playedCardEichel; let i = index" >
+<img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card">
+</div>
+</div>
+
+<div style="display: flex; margin-bottom: -5%">
+  <div *ngFor="let card of playedCardSchellen; let i = index" >
+    <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card">
+  </div>
+</div>
+
+
+<div style="display: flex; margin-bottom: -5%">
+  <div *ngFor="let card of playedCardHeart; let i = index" >
+    <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card">
+  </div>
+</div>
+
+
+<div style="display: flex; margin-bottom: -5%">
+  <div *ngFor="let card of playedCardGras; let i = index" >
+    <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card">
+  </div>
+</div>
+</div>
+
+
+<div style="position: absolute; left: -35%; top: 40%; width: 100%; rotate: 90deg">
+  <div style="position: relative; display: flex; justify-content: center;">
+    <div *ngFor="let card of currentCardsPlayer2; let i = index" [class]="'p1card' + i">
+      <div *ngIf="currentPlayer!=1">
+        <div *ngIf="!round">
+          <img @cardIn [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card1 float">
+        </div>
+        <div *ngIf="round">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card1 float">
+        </div>
+      </div>
+      <div *ngIf="currentPlayer==1">
+        <div *ngIf="playable(card.value)">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card1 float" (click)="playCard(i)">
+        </div>
+        <div *ngIf="!playable(card.value)">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "darkend float">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position: absolute; top: 10%; width: 100%; rotate: 180deg">
+  <div style="position: relative; display: flex; justify-content: center;">
+    <div *ngFor="let card of currentCardsPlayer3; let i = index" [class]="'p1card' + i">
+      <div *ngIf="currentPlayer!=2">
+        <div *ngIf="!round">
+          <img @cardIn [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card1 float">
+        </div>
+        <div *ngIf="round">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card1 float">
+        </div>
+      </div>
+      <div *ngIf="currentPlayer==2">
+        <div *ngIf="playable(card.value)">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card1 float" (click)="playCard(i)">
+        </div>
+        <div *ngIf="!playable(card.value)">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "darkend float">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position: absolute; top: 40%; right: -35%; width: 100%; rotate: 270deg">
+  <div style="position: relative; display: flex; justify-content: center;">
+    <div *ngFor="let card of currentCardsPlayer4; let i = index" [class]="'p1card' + i">
+      <div *ngIf="currentPlayer!=3">
+        <div *ngIf="!round">
+          <img @cardIn [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card1 float">
+        </div>
+        <div *ngIf="round">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card1 float">
+        </div>
+      </div>
+      <div *ngIf="currentPlayer==3">
+        <div *ngIf="playable(card.value)">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card1 float" (click)="playCard(i)">
+        </div>
+        <div *ngIf="!playable(card.value)">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "darkend float">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position: absolute; bottom: 10%; width: 100%">
+  <div style="position: relative; display: flex; justify-content: center;">
+    <div *ngFor="let card of currentCardsPlayer1; let i = index" [class]="'p1card' + i">
+      <div *ngIf="currentPlayer!=0">
+        <div *ngIf="!round">
+          <img @cardIn [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card1 float">
+        </div>
+        <div *ngIf="round">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card1 float">
+        </div>
+      </div>
+      <div *ngIf="currentPlayer==0">
+        <div *ngIf="playable(card.value)">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card1 float" (click)="playCard(i)">
+        </div>
+        <div *ngIf="!playable(card.value)">
+          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "darkend float">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div @open *ngIf="showFinal" class = "wrapper">
+  <div class = "game-instructions">
+    <h1 class = "text">Finale</h1>
+    <h6 class = "text">Im Finale ist das Ziel möglichst schnell alle Karten loszuwerden.
+    Es startet der Spieler mit dem Eichel Unter in der Hand, der diesen auspielen muss.</h6>
+    <h6 class = "text">Nun kann reihum die nächst höhere oder niedrigere Karte angelegt werden.<br>Jeder Spieler kann statt anzulegen auch einen neuen Unter ins Spiel bringen, sodass eine neue Farbe zum anlegen auf dem Tisch ist.</h6>
+    <h6 class = "text">Wenn man keine Karte zum ausspielen auf der Hand hat, wird man ausgelassen.</h6>
+    <button class = "close" (click)="showFinal=false; findStartPlayer(); round=true"><b>Alles klar!</b></button>
+  </div>
+</div>
+
+
+<div @open *ngIf="displayWinnings" class = "wrapper">
+  <div class = "game-instructions">
+    <h1 class = "text">Endstand:</h1>
+    <h6 class = "text">Im Finale ist das Ziel möglichst schnell alle Karten loszuwerden.
+      Es startet der Spieler mit dem Eichel Unter in der Hand, der diesen auspielen muss.</h6>
+    <h6 class = "text">Nun kann reihum die nächst höhere oder niedrigere Karte angelegt werden.<br>Jeder Spieler kann statt anzulegen auch einen neuen Unter ins Spiel bringen, sodass eine neue Farbe zum anlegen auf dem Tisch ist.</h6>
+    <h6 class = "text">Wenn man keine Karte zum ausspielen auf der Hand hat, wird man ausgelassen.</h6>
+    <button class = "close"><b>Noch einmal!</b></button>
+    <button class = "close"><b>Zurück.</b></button>
+  </div>
+</div>
