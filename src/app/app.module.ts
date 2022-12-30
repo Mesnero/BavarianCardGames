@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 import { StartComponent } from './start/start.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { ParisComponent } from './paris/paris.component';
@@ -19,13 +19,14 @@ import { ArschlochComponent } from './arschloch/arschloch.component';
     ImageSliderComponent,
     ParisComponent,
     CardTableComponent,
-    ArschlochComponent
+    ArschlochComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    RouterOutlet
+    RouterOutlet,
+    RouterLink
   ],
   providers: [CarddeckService],
   bootstrap: [AppComponent]

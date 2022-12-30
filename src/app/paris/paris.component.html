@@ -1,106 +1,25 @@
-
 <app-card-table></app-card-table>
 
-<div @open *ngIf="showTutorial" class = "wrapper">
-  <div class = "game-instructions">
-    <h1 class = "text">Scheiß Paris</h1>
-    <h6 class = "text">Das Spiel "Scheiß Paris" wird in fünf Spielrunden und eine Finalrunde unterteilt.
-      Während der Spielphase wird je nach Runde Geld in den Pott eingezahlt, welches in der Finalrunde ausgespielt wird.</h6>
-    <h6 class = "text">Immer geltende Regeln:<br>- Der Stechende des vorherigen Spielzuges spielt aus<br>- Außerdem muss die erste gelegte Farbe immer zugegeben werden. Bedeutet: Wenn man mindestens eine Karte in der ausgelegten Farbe besitzt, muss man eine solche zugeben.</h6>
-    <h5 class = "text">Die genaueren Regeln der Runden werden davor erklärt.</h5>
-    <button class = "close" (click)="showTutorial=false; dealCards()"><b>Alles klar!</b></button>
-  </div>
-</div>
-
-
-
-
-<div style="position: absolute; left: -35%; top: 40%; width: 100%; rotate: 90deg">
-  <div style="position: relative; display: flex; justify-content: center;">
-    <div *ngFor="let card of currentCardsPlayer2; let i = index" [class]="'p1card' + i">
-      <div *ngIf="currentPlayer!=1">
-        <div *ngIf="round==-1">
-          <img @cardIn [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card float">
-        </div>
-        <div *ngIf="round!=-1">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card float">
-        </div>
-      </div>
-      <div *ngIf="currentPlayer==1">
-        <div *ngIf="playable(card.value)">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card float" (click)="playCard(i)">
-        </div>
-        <div *ngIf="!playable(card.value)">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "darkend float">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div style="position: absolute; top: 10%; width: 100%; rotate: 180deg">
-  <div style="position: relative; display: flex; justify-content: center;">
-    <div *ngFor="let card of currentCardsPlayer3; let i = index" [class]="'p1card' + i">
-      <div *ngIf="currentPlayer!=2">
-        <div *ngIf="round==-1">
-          <img @cardIn [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card float">
-        </div>
-        <div *ngIf="round!=-1">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card float">
-        </div>
-      </div>
-      <div *ngIf="currentPlayer==2">
-        <div *ngIf="playable(card.value)">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card float" (click)="playCard(i)">
-        </div>
-        <div *ngIf="!playable(card.value)">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "darkend float">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div style="position: absolute; top: 40%; right: -35%; width: 100%; rotate: 270deg">
-  <div style="position: relative; display: flex; justify-content: center;">
-    <div *ngFor="let card of currentCardsPlayer4; let i = index" [class]="'p1card' + i">
-      <div *ngIf="currentPlayer!=3">
-        <div *ngIf="round==-1">
-          <img @cardIn [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card float">
-        </div>
-        <div *ngIf="round!=-1">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card float">
-        </div>
-      </div>
-      <div *ngIf="currentPlayer==3">
-        <div *ngIf="playable(card.value)">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card float" (click)="playCard(i)">
-        </div>
-        <div *ngIf="!playable(card.value)">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "darkend float">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div style="position: absolute; bottom: 10%; width: 100%">
-  <div style="position: relative; display: flex; justify-content: center;">
-    <div *ngFor="let card of currentCardsPlayer1; let i = index" [class]="'p1card' + i">
-      <div *ngIf="currentPlayer!=0">
+<!-- KARTEN DER SPIELER -->
+<div *ngFor="let hand of cardsPlayer; let j = index">
+  <div [class]="'player'+j">
+    <div style="position: relative; display: flex; justify-content: center;">
+      <div *ngFor="let card of hand; let i = index" [class]="'card'+i">
+        <div *ngIf="currentPlayer!=j">
           <div *ngIf="round==-1">
-        <img @cardIn [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card float">
+            <img @cardIn [alt]="card.value" [src]="'assets/Cards/' + card.value + '.png'" class="card float">
           </div>
-        <div *ngIf="round!=-1">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card.value" class = "card float">
+          <div *ngIf="round!=-1">
+            <img [alt]="card.value" [src]="'assets/Cards/' + card.value + '.png'" class="card float">
+          </div>
         </div>
-      </div>
-      <div *ngIf="currentPlayer==0">
-        <div *ngIf="playable(card.value)">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card float" (click)="playCard(i)">
-        </div>
-        <div *ngIf="!playable(card.value)">
-          <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "darkend float">
+        <div *ngIf="currentPlayer==j">
+          <div *ngIf="playable(card.value)">
+            <img (click)="playCard(i)" [alt]="card" [src]="'assets/Cards/' + card.value + '.png'" class="card float">
+          </div>
+          <div *ngIf="!playable(card.value)">
+            <img [alt]="card" [src]="'assets/Cards/' + card.value + '.png'" class="darkend float">
+          </div>
         </div>
       </div>
     </div>
@@ -108,85 +27,99 @@
 </div>
 
 
-
-<div @open *ngIf="showGame1" class = "wrapper">
-  <div class = "game-instructions">
-    <h1 class = "text">{{headingPhases[phase-1]}}</h1>
-    <h6 class = "text">{{textPhases[phase-1]}}</h6>
-    <h5 class = "text">Viel Glück!</h5>
-    <button class = "close" (click)="showGame1=false; startGame(); this.currentPlayer = (this.beginPlayer+this.phase-1)%4;"><b>Let's go!</b></button>
+<!-- POPUPS -->
+<div *ngIf="showPopup" @open class="wrapper">
+  <div class="game-instructions">
+    <h1 class="text">{{headingPhases[phase]}}</h1>
+    <h6 class="text">{{textPhases[phase]}}</h6>
+    <h5 class="text">Viel Glück!</h5>
+    <button (click)="startPhase()"
+            class="close"><b>Let's
+      go!</b></button>
   </div>
 </div>
 
-<div class = "center">
+<!-- GESPIELTE KARTEN -->
+<div class="center">
   <div style="display: flex">
-<div *ngFor="let card of playedCard; let i = index" >
-    <div *ngIf="i%2==0" [style]="'rotate:' + i*-15 + 'deg; margin-left: -5%'">
-  <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card">
+    <div *ngFor="let card of playedCard; let i = index">
+      <div *ngIf="i%2==0" [style]="'rotate:' + i*-15 + 'deg; margin-left: -5%'">
+        <img [alt]="card" [src]="'assets/Cards/' + card.value + '.png'" class="card">
+      </div>
+      <div *ngIf="i%2!=0" style="rotate: 15deg; margin-left: -5%">
+        <img [alt]="card" [src]="'assets/Cards/' + card.value + '.png'" class="card">
+      </div>
     </div>
-  <div *ngIf="i%2!=0" style="rotate: 15deg; margin-left: -5%">
-    <img [src]="'assets/Cards/' + card.value + '.png'" [alt]="card" class = "card">
-  </div>
-</div>
-</div>
-</div>
-
-<div *ngIf="currentPlayer == 0;">
-<div class="player one glow">
-  <h2 class="textplayer first">{{player[0].name}}</h2>
-  <h2 class="textplayer second">{{player[0].money}}<b class="ct">ct</b></h2>
-</div>
-</div>
-
-<div *ngIf="currentPlayer != 0;">
-  <div class="player one">
-    <h2 class="textplayer first">{{player[0].name}}</h2>
-    <h2 class="textplayer second">{{player[0].money}}<b class="ct">ct</b></h2>
   </div>
 </div>
 
-<div *ngIf="currentPlayer == 1;">
-<div class="player two glow">
-  <h2 class="textplayer first">{{player[1].name}}</h2>
-  <h2 class="textplayer second">{{player[1].money}}<b class="ct">ct</b></h2>
-</div>
-</div>
-
-<div *ngIf="currentPlayer != 1;">
-  <div class="player two">
-    <h2 class="textplayer first">{{player[1].name}}</h2>
-    <h2 class="textplayer second">{{player[1].money}}<b class="ct">ct</b></h2>
+<!--SPIELER BADGES -->
+<div *ngFor="let player of players; let i = index">
+  <div *ngIf="currentPlayer == i;">
+    <div [class]="'player badge' + i + ' glow'">
+      <h2 class="textplayer first">{{player.name}}</h2>
+      <h2 class="textplayer second">{{player.money}}<b class="ct">ct</b></h2>
+    </div>
+  </div>
+  <div *ngIf="currentPlayer != i;">
+    <div [class]="'player badge' + i">
+      <h2 class="textplayer first">{{player.name}}</h2>
+      <h2 class="textplayer second">{{player.money}}<b class="ct">ct</b></h2>
+    </div>
   </div>
 </div>
 
-<div *ngIf="currentPlayer == 2;">
-<div class="player three glow">
-  <h2 class="textplayer first">{{player[2].name}}</h2>
-  <h2 class="textplayer second">{{player[2].money}}<b class="ct">ct</b></h2>
-</div>
+<!--STICH ANIMATION -->
+<div *ngIf="showStich" @open class="stich">
+  <h2 style="color: #ff0000">{{players[looser].name}} sticht.{{moneyString}}</h2>
 </div>
 
-<div *ngIf="currentPlayer != 2;">
-  <div class="player three">
-    <h2 class="textplayer first">{{player[2].name}}</h2>
-    <h2 class="textplayer second">{{player[2].money}}<b class="ct">ct</b></h2>
+
+<!-- CARDS PLAYED FINAL -->
+<div *ngIf="phase==6" class="center">
+  <div *ngFor="let color of playedCardsFinal" style="display: flex; margin-bottom: -5%">
+    <div *ngFor="let card of color">
+      <img [alt]="card" [src]="'assets/Cards/' + card.value + '.png'" class="cardSmall">
+    </div>
   </div>
 </div>
 
-<div *ngIf="currentPlayer == 3;">
-<div class="player four glow">
-  <h2 class="textplayer first">{{player[3].name}}</h2>
-  <h2 class="textplayer second">{{player[3].money}}<b class="ct">ct</b></h2>
-</div>
-</div>
-
-<div *ngIf="currentPlayer != 3;">
-  <div class="player four">
-    <h2 class="textplayer first">{{player[3].name}}</h2>
-    <h2 class="textplayer second">{{player[3].money}}<b class="ct">ct</b></h2>
+<!-- MEDALS -->
+<div *ngIf="phase==6">
+  <div *ngFor="let medal of sourceWinners; let i = index">
+    <img [class]="'medal' + i" [src]="medal" alt="medal">
   </div>
 </div>
 
-<div @open *ngIf="showStich" class = "stich">
-<h2 style="color: #ff0000">{{player[looser].name}} sticht.{{moneyString}}</h2>
+<!-- ENDSCREEN -->
+<div *ngIf="displayWinnings" @open class="wrapper">
+  <div class="game-instructions">
+    <h1 class="text">Results:</h1>
+    <div style="display: flex">
+      <img class="medalsmall" src="assets/medals/first.png">
+      <div style="width: 75%">
+        <h2 class="text">{{winner[0].name}} (200)</h2>
+      </div>
+    </div>
+    <div style="display: flex">
+      <img class="medalsmall" src="assets/medals/second.png">
+      <div style="width: 75%">
+        <h2 class="text">{{winner[1].name}} (120)</h2>
+      </div>
+    </div>
+    <div style="display: flex">
+      <img class="medalsmall" src="assets/medals/third.png">
+      <div style="width: 75%">
+        <h2 class="text">{{winner[2].name}} (80)</h2>
+      </div>
+    </div>
+    <div style="display: flex; margin-bottom: 5vh ">
+      <img class="medalsmall" src="assets/medals/forth.png">
+      <div style="width: 75%">
+        <h2 class="text">{{winner[3].name}} (0)</h2>
+      </div>
+    </div>
+    <button (click)="resetGame()" class="close"><b>Go again!</b></button>
+    <button [routerLink]="['/']" class="close"><b>Exit</b></button>
+  </div>
 </div>
