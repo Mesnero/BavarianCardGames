@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {animate, keyframes, style, transition, trigger, state} from "@angular/animations";
+import {animate, keyframes, style, transition, trigger} from "@angular/animations";
 import {CarddeckService} from "../carddeck.service";
 
 @Component({
@@ -7,28 +7,31 @@ import {CarddeckService} from "../carddeck.service";
   templateUrl: './arschloch.component.html',
   styleUrls: ['./arschloch.component.css'],
   animations: [
-    trigger('open', [
-      transition(':enter', [
-        style({opacity: 0}),
-        animate('1000ms', style({opacity: 1}))
-      ]),
-      transition(':leave', [
-        style({opacity: 1}),
-        animate('1000ms', style({opacity: 0}))
-      ])
-    ]),
     trigger('cardIn', [
-      transition(':enter', [
-        animate('250ms', keyframes([
-          style({transform: 'translateY(1000px)', offset: 0}),
-          style({transform: 'translateY(0) translateX(0)', offset: 1}),
-        ]))])])
-  ]
+    transition(':enter', [
+      animate('400ms', keyframes([
+        style({transform: 'translateY(1000px)', offset: 0}),
+        style({transform: 'translateY(0) translateX(0)', offset: 1}),
+      ]))])])]
 })
 
 export class ArschlochComponent implements OnInit {
+  cardsPlayer: any[] = [];
 
+
+  constructor(private cardDeck: CarddeckService) {
+  }
   ngOnInit(): void {
+    this.dealCards();
+  }
+
+  private dealCards() {
+    let deck = this.cardDeck.getShuffledDeck();
+    for (let i = 0; i < 8; i++) {
+      setTimeout(() => {
+        this.cardsPlayer.push(deck.pop());
+      }, i * 500);
+    }
   }
 
 }

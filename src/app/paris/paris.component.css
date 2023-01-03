@@ -62,10 +62,9 @@ h5 {
   filter: brightness(50%);
 }
 
-.card0 {
+.card0  {
   transform: rotate(70deg);
   transform-origin: bottom left;
-  left: 10rem;
   z-index: 7;
 }
 
@@ -87,29 +86,27 @@ h5 {
   transform: rotate(10deg);
   transform-origin: bottom left;
   margin-left: -10%;
-  margin-right: -5%;
   z-index: 4;
 }
 
 .card4 {
   transform: rotate(-10deg);
   transform-origin: bottom right;
-  margin-right: -10%;
-  margin-left: -5%;
+  margin-left: -10%;
   z-index: 3;
 }
 
 .card5 {
   transform: rotate(-30deg);
   transform-origin: bottom right;
-  margin-right: -10%;
+  margin-left: -10%;
   z-index: 2;
 }
 
 .card6 {
   transform: rotate(-50deg);
   transform-origin: bottom right;
-  margin-right: -10%;
+  margin-left: -10%;
   z-index: 1;
 }
 
@@ -117,7 +114,9 @@ h5 {
   transform: rotate(-70deg);
   transform-origin: bottom right;
   z-index: 0;
+  margin-left: -10%;
 }
+
 
 .float {
   transition-duration: 125ms;
@@ -208,20 +207,20 @@ h5 {
 }
 
 
-.player1 {
+.computer1 {
   position: absolute; left: -35%; top: 40%; width: 100%; rotate: 90deg
 }
 
-.player2 {
+.computer2 {
   position: absolute; top: 10%; width: 100%; rotate: 180deg
 }
 
-.player3 {
+.computer3 {
   position: absolute; top: 40%; right: -35%; width: 100%; rotate: 270deg
 }
 
-.player0 {
-  position: absolute; bottom: 10%; width: 100%
+.yourPlayer {
+  position: absolute; bottom: 10%; width: 100%; rotate: 360deg;
 }
 
 .center {
@@ -270,4 +269,8 @@ h5 {
 
 .medalsmall {
   width: 8vh;
+}
+
+.played {
+  z-index: -100;
 }

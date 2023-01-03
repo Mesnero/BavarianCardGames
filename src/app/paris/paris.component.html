@@ -1,31 +1,51 @@
 <app-card-table></app-card-table>
 
-<!-- KARTEN DER SPIELER -->
+
+
+<!-- KARTEN DER COMPUTER -->
 <div *ngFor="let hand of cardsPlayer; let j = index">
-  <div [class]="'player'+j">
+  <div *ngIf="j != 0" [class]="'computer' + j">
     <div style="position: relative; display: flex; justify-content: center;">
-      <div *ngFor="let card of hand; let i = index" [class]="'card'+i">
-        <div *ngIf="currentPlayer!=j">
-          <div *ngIf="round==-1">
-            <img @cardIn [alt]="card.value" [src]="'assets/Cards/' + card.value + '.png'" class="card float">
-          </div>
-          <div *ngIf="round!=-1">
-            <img [alt]="card.value" [src]="'assets/Cards/' + card.value + '.png'" class="card float">
-          </div>
+    <div *ngFor="let card of hand; let i = index" [class] = "'card'+i">
+      <div *ngIf="card.value == 'Played'">
+        <img alt="computerCard" [src]="'assets/Cards/Played.png'" class="card">
+      </div>
+      <div *ngIf="card.value != 'Played'">
+        <div *ngIf="round == -1">
+          <img @cardIn alt="computerCard" [src]="'assets/Cards/CardBack.png'" class="card">
         </div>
-        <div *ngIf="currentPlayer==j">
-          <div *ngIf="playable(card.value)">
-            <img (click)="playCard(i)" [alt]="card" [src]="'assets/Cards/' + card.value + '.png'" class="card float">
-          </div>
-          <div *ngIf="!playable(card.value)">
-            <img [alt]="card" [src]="'assets/Cards/' + card.value + '.png'" class="darkend float">
-          </div>
+        <div *ngIf="round != -1">
+          <img alt="computerCard" [src]="'assets/Cards/CardBack.png'" class="card">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- KARTEN DES SPIELERS -->
+<div class="yourPlayer">
+  <div style="position: relative; display: flex; justify-content: center;">
+    <div *ngFor="let card of cardsPlayer[0]; let i = index" [class]="'card'+ i + isPlayed(card)">
+      <div *ngIf="currentPlayer!=0">
+        <div *ngIf="round==-1">
+          <img @cardIn [alt]="card.value" [src]="'assets/Cards/' + card.value + '.png'" class="card float">
+        </div>
+        <div *ngIf="round!=-1">
+          <img [alt]="card.value" [src]="'assets/Cards/' + card.value + '.png'" class="card float">
+        </div>
+      </div>
+      <div *ngIf="currentPlayer==0">
+        <div *ngIf="playable(card.value)">
+          <img (click)="playCard(i)" [alt]="card" [src]="'assets/Cards/' + card.value + '.png'" class="card float">
+        </div>
+        <div *ngIf="!playable(card.value)">
+          <img [alt]="card" [src]="'assets/Cards/' + card.value + '.png'" class="darkend float">
         </div>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- POPUPS -->
 <div *ngIf="showPopup" @open class="wrapper">
@@ -96,25 +116,25 @@
   <div class="game-instructions">
     <h1 class="text">Results:</h1>
     <div style="display: flex">
-      <img class="medalsmall" src="assets/medals/first.png">
+      <img class="medalsmall" src="assets/medals/first.png" alt="first">
       <div style="width: 75%">
         <h2 class="text">{{winner[0].name}} (200)</h2>
       </div>
     </div>
     <div style="display: flex">
-      <img class="medalsmall" src="assets/medals/second.png">
+      <img class="medalsmall" src="assets/medals/second.png" alt="second">
       <div style="width: 75%">
         <h2 class="text">{{winner[1].name}} (120)</h2>
       </div>
     </div>
     <div style="display: flex">
-      <img class="medalsmall" src="assets/medals/third.png">
+      <img class="medalsmall" src="assets/medals/third.png" alt ="third">
       <div style="width: 75%">
         <h2 class="text">{{winner[2].name}} (80)</h2>
       </div>
     </div>
     <div style="display: flex; margin-bottom: 5vh ">
-      <img class="medalsmall" src="assets/medals/forth.png">
+      <img class="medalsmall" src="assets/medals/forth.png" alt ="forth">
       <div style="width: 75%">
         <h2 class="text">{{winner[3].name}} (0)</h2>
       </div>

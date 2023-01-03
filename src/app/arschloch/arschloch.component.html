@@ -1,29 +1,9 @@
+
 <app-card-table></app-card-table>
-<div class="wrapper">
-  <div class="game-instructions">
-    <h1 class="text">Results:</h1>
-    <div style="display: flex">
-      <img class="medalsmall" src="assets/medals/first.png">
-      <div style="width: 75%">
-        <h2 class="text">Beda (200)</h2>
-      </div>    </div>
-    <div style="display: flex">
-      <img class="medalsmall" src="assets/medals/second.png">
-      <div style="width: 75%">
-        <h2 class="text">Beda (120)</h2>
-      </div>    </div>
-    <div style="display: flex">
-      <img class="medalsmall" src="assets/medals/third.png">
-      <div style="width: 75%">
-      <h2 class="text">Beda (80)</h2>
-      </div>
+<div class="yourPlayer">
+  <div style="position: relative; display: flex; justify-content: center;">
+    <div *ngFor="let card of cardsPlayer; let i = index" [class]="'card'+i">
+      <img @cardIn [alt]="card.value" [src]="'assets/Cards/' + card.value + '.png'" class="card">
     </div>
-    <div style="display: flex; margin-bottom: 5vh ">
-      <img class="medalsmall" src="assets/medals/forth.png">
-      <div style="width: 75%">
-        <h2 class="text">Beda (0)</h2>
-      </div>    </div>
-    <button class="close"><b>Go again!</b></button>
-    <button class="close"><b>Exit</b></button>
   </div>
 </div>

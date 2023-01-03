@@ -11,6 +11,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CardTableComponent } from './card-table/card-table.component';
 import {CarddeckService} from "./carddeck.service";
 import { ArschlochComponent } from './arschloch/arschloch.component';
+import {ComputerPlayerService} from "./paris/computer.player.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ArschlochComponent } from './arschloch/arschloch.component';
     RouterOutlet,
     RouterLink
   ],
-  providers: [CarddeckService],
+  providers: [CarddeckService, ComputerPlayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

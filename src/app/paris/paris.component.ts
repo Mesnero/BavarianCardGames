@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, keyframes, style, transition, trigger} from "@angular/animations";
 import {CarddeckService} from "../carddeck.service";
+import {interval, takeWhile} from "rxjs";
+import {ComputerPlayerService} from "./computer.player.service";
 
 @Component({
   selector: 'app-paris',
@@ -53,13 +55,14 @@ export class ParisComponent implements OnInit {
   sourceMedals: string[] = ['assets/medals/first.png', 'assets/medals/second.png', 'assets/medals/third.png', 'assets/medals/forth.png'];
   sourceWinners: string[] = ['assets/medals/noMedal.png', 'assets/medals/noMedal.png','assets/medals/noMedal.png', 'assets/medals/noMedal.png'];
 
-  constructor(private cardDeck: CarddeckService) {
+  constructor(private cardDeck: CarddeckService, private computer: ComputerPlayerService) {
   }
 
   ngOnInit(): void {
     this.initializeVars();
     this.beginPlayer = Math.floor(Math.random() * 4);
     this.showPopup = true;
+    this.startComputerPlayer();
   }
 
   startPhase() {
@@ -79,8 +82,17 @@ export class ParisComponent implements OnInit {
       this.playCardFinal(i);
       return;
     }
+
     this.playedCard.push(this.cardsPlayer[this.currentPlayer][i]);
-    this.cardsPlayer[this.currentPlayer][i] = {value: 'Played', score: -1, color: 'NA'};
+
+    this.cardsPlayer[this.currentPlayer].splice(i, 1);
+    if(this.round % 2 == 1) {
+      this.cardsPlayer[this.currentPlayer].push({value: 'Played', color: 'NaN', score: -1});
+    }
+    else {
+      this.cardsPlayer[this.currentPlayer].unshift({value: 'Played', color: 'NaN', score: -1});
+    }
+
     this.cardsPlayed++;
     this.currentPlayer = (this.currentPlayer + 1) % 4;
     if (this.cardsPlayed == 4) {
@@ -92,7 +104,7 @@ export class ParisComponent implements OnInit {
         if (this.round == 8) {
           this.nextPhase();
         }
-      }, 1500);
+      }, 2500);
     }
   }
 
@@ -294,6 +306,12 @@ export class ParisComponent implements OnInit {
       if (this.cardsPlayer[2][i].value == 'EU') this.currentPlayer = 2;
       if (this.cardsPlayer[3][i].value == 'EU') this.currentPlayer = 3;
     }
+    if(this.currentPlayer != 0) {
+      setTimeout( () => {
+      let index = this.computer.chooseCardFinal(this.playedCardsFinal, this.cardsPlayer[this.currentPlayer], this.playableCards);
+      this.playCardFinal(index);
+      }, 1500);
+    }
   }
 
   private playCardFinal(i: number) {
@@ -351,10 +369,17 @@ export class ParisComponent implements OnInit {
 
   private passPlayer() {
     if(this.canPlay()) {
+      if(this.currentPlayer != 0) {
+        setTimeout(() => {
+          let index = this.computer.chooseCardFinal(this.playedCardsFinal, this.cardsPlayer[this.currentPlayer], this.playableCards);
+          this.playCardFinal(index);
+        }, 2000);
+      }
       return;
     }
     if(this.cardsPlayed == 32) {
       this.displayWinnings = true;
+      this.currentPlayer = -1;
       this.winner[0].money += 200;
       this.winner[1].money += 120;
       this.winner[2].money += 80;
@@ -402,6 +427,26 @@ export class ParisComponent implements OnInit {
     this.sourceWinners = ['assets/medals/noMedal.png', 'assets/medals/noMedal.png','assets/medals/noMedal.png', 'assets/medals/noMedal.png'];
     this.beginPlayer = Math.floor(Math.random() * 4);
     this.showPopup = true;
+  }
+
+  private startComputerPlayer() {
+    interval(1500).pipe(takeWhile(() => true)).subscribe(() => {
+        if(this.currentPlayer != 0 && this.currentPlayer != -1){
+           if(this.phase != 6) {
+             setTimeout(() => {
+               let index = this.computer.chooseCard(this.playedCard, this.cardsPlayer[this.currentPlayer], this.phase);
+               this.playCard(index);
+             }, 500)
+           }
+        }
+    });
+  }
+
+  isPlayed(card: any) {
+    if(card.value == 'Played') {
+      return ' played';
+    }
+    return '';
   }
 }
 
