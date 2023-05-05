@@ -12,6 +12,9 @@ import { CardTableComponent } from './card-table/card-table.component';
 import {CarddeckService} from "./carddeck.service";
 import { ArschlochComponent } from './arschloch/arschloch.component';
 import {ComputerPlayerService} from "./paris/computer.player.service";
+import { ParisLobbyComponent } from './paris/paris-lobby/paris-lobby.component';
+import {FormsModule} from "@angular/forms";
+import { TestingComponent } from './testing/testing.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +24,17 @@ import {ComputerPlayerService} from "./paris/computer.player.service";
     ParisComponent,
     CardTableComponent,
     ArschlochComponent,
+    ParisLobbyComponent,
+    TestingComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    RouterOutlet,
-    RouterLink
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        RouterOutlet,
+        RouterLink,
+        FormsModule
+    ],
   providers: [CarddeckService, ComputerPlayerService],
   bootstrap: [AppComponent]
 })

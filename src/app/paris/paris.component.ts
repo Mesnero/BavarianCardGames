@@ -30,10 +30,7 @@ import {ComputerPlayerService} from "./computer.player.service";
 export class ParisComponent implements OnInit {
   showPopup: boolean = false;
   cardsPlayer: any[][] = [[], [], [], []];
-  players: any[] = [{name: 'Jojo', money: 500}, {name: 'Mane', money: 500}, {name: 'Sepp', money: 500}, {
-    name: 'Bäda',
-    money: 500
-  }];
+  players: any[] = [{name: 'Jojo', money: 500}, {name: 'Mane', money: 500}, {name: 'Sepp', money: 500}, {name: 'Bäda', money: 500}];
   currentPlayer: number = -1;
   playedCard: any[] = [];
   cardsPlayed: number = 0;
@@ -46,7 +43,7 @@ export class ParisComponent implements OnInit {
   headingPhases: string[] = [];
   textPhases: string[] = [];
 
-
+  //Final
   playedCardsFinal: any[][] = [[], [], [], []];
   playableCards: string[] = ['EU'];
   playedCardPlayers: number[] = [0, 0, 0, 0];

@@ -114,7 +114,7 @@ h3 {
   display: flex;
   justify-content: center;
   width: 40%;
-  left: calc(30% + 40px);
+  left: calc(30% + 50px);
 }
 
 .card-player1 {

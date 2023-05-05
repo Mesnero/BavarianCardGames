@@ -1,2 +1,109 @@
-<h1>COMING SOON</h1>
-<button [routerLink]="['/']">BACK</button>
+<app-card-table></app-card-table>
+
+
+<div class="waiting" *ngIf="phase==0"><h1 [innerHTML]="waitingAnimation"></h1></div>
+
+<!-- Player Badges-->
+<div>
+  <div class="wrapper-one" *ngIf="players[0]">
+    <div class="player-badge player-one" [ngStyle]="{'border-color': currentPlayer == 0 ? 'yellow' : '#894E24'}"></div>
+    <div><h2>{{players[0].name}}</h2>
+      <h3>{{players[0].money}}$</h3></div>
+  </div>
+
+  <div class="wrapper-two" *ngIf="players[1]">
+    <div class="player-badge player-one" [ngStyle]="{'border-color': currentPlayer == 1 ? 'yellow' : '#894E24'}"></div>
+    <div><h2>{{players[1].name}}</h2>
+      <h3>{{players[1].money}}$</h3></div>
+  </div>
+
+  <div class="wrapper-three" *ngIf="players[2]">
+    <div class="player-badge player-one" [ngStyle]="{'border-color': currentPlayer == 2 ? 'yellow' : '#894E24'}"></div>
+    <div><h2>{{players[2].name}}</h2>
+      <h3>{{players[2].money}}$</h3></div>
+  </div>
+
+  <div class="wrapper-four" *ngIf="players[3]">
+    <div class="player-badge player-one" [ngStyle]="{'border-color': currentPlayer == 3 ? 'yellow' : '#894E24'}"></div>
+    <div><h2>{{players[3].name}}</h2>
+      <h3>{{players[3].money}}$</h3></div>
+  </div>
+</div>
+
+<!-- Stich animation -->
+<div style="display: flex; justify-content: center">
+  <div class="stich" *ngIf='showStich' [@slideInOutAnimation]="showStich">
+    <h1>{{stichPlayer}} sticht!<br>{{stichLoss}} ct.</h1>
+  </div>
+</div>
+
+<!-- Player Cards -->
+<div>
+  <div class="hand">
+    <div class="hand" [@slideInBottom]="moreThanOneCard" *ngIf='moreThanOneCard'>
+    </div>
+    <div class="card-hand" [@slideInBottom]="moreThanOneCard" *ngIf='moreThanOneCard' [ngStyle]="{'left': leftCards(cardsRemaining)}">
+      <div *ngFor="let card of cardPlayer[0]; let i = index"
+           [ngStyle]="{'rotate': rotate(i), 'z-index': i+1, 'margin': margin(i)}">
+        <div *ngIf="yourTurn && playable(card.value)" class="card"
+             [ngStyle]="{'background-image': 'url(assets/Cards/' + card.value + '.png'}" (click)="playCard(card)"></div>
+        <div *ngIf="yourTurn && !playable(card.value)" class="card darkened"
+             [ngStyle]="{'background-image': 'url(assets/Cards/' + card.value + '.png'}"></div>
+        <div *ngIf="!yourTurn" class="card"
+             [ngStyle]="{'background-image': 'url(assets/Cards/' + card.value + '.png'}"></div>
+      </div>
+    </div>
+    <div class="hand" [@slideInBottom]="moreThanOneCard" *ngIf='moreThanOneCard'>
+      <div class="only-finger"></div>
+    </div>
+  </div>
+</div>
+<!-- Computer Cards -->
+<div>
+  <div class="computer-hand card-player1">
+    <div *ngFor="let card of cardPlayer[1]; let i = index"
+         [ngStyle]="{'rotate': rotateSym(i), 'z-index': i+1, 'margin': margin(i)}">
+      <div class="card" [ngStyle]="{'background-image': 'url(assets/Cards/CardBack.png'}"></div>
+    </div>
+  </div>
+
+  <div class="computer-hand card-player2">
+    <div *ngFor="let card of cardPlayer[2]; let i = index"
+         [ngStyle]="{'rotate': rotateSym(i), 'z-index': i+1, 'margin': margin(i)}">
+      <div class="card" [ngStyle]="{'background-image': 'url(assets/Cards/CardBack.png'}"></div>
+    </div>
+  </div>
+
+  <div class="computer-hand card-player3">
+    <div *ngFor="let card of cardPlayer[3]; let i = index"
+         [ngStyle]="{'rotate': rotateSym(i), 'z-index': i+1, 'margin': margin(i)}">
+      <div class="card" [ngStyle]="{'background-image': 'url(assets/Cards/CardBack.png'}"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Cards already played -->
+<div *ngFor="let card of playedCards; let i = index" class="card-played"
+     [ngStyle]="{'transform': rotatePlayed(i), 'left': i*25 + 'px'}">
+  <div class="card" [ngStyle]="{'background-image': 'url(\'assets/Cards/' + card.value + '.png\')'}"></div>
+</div>
+
+
+<!--
+2. Card Positioning when more cards get played (Testing und position of played)
+3. Current Player Design
+6. Round "Erklärung"
+5. Phase 5,6 Money removal
+6. Königphase end when king played
+1. Top Right Menu
+7. Unterlegen
+8. Money added at end of game
+9. Winner Medals
+10. Responsive
+11. Sounds
+12. Music
+13. Language
+14. Socket
+15. Account Safety
+16. Still available on reload
+-->
